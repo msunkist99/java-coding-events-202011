@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8"/>
     <title></title>
+
+    <link rel = "stylesheet" th:href="@{styles.css}" />
+
 </head>
 <body>
 
 <h1>All Events</h1>
 
-<ul>
-    <th:block th:each="event : ${events}">
-        <li th:text="${event}"></li>
-    </th:block>
-</ul>
+<table class="table-center">
+    <thead>
+        <tr>
+            <th class="table-border">Event Name</th>
+            <th class="table-border">Event Description</th>
+        </tr>
+    </thead>
+    <tr th:block th:each="event : ${events}">
+        <td class="table-border" th:text="${event.getKey()}"></td>
+        <td class="table-border" th:text="${event.getValue()}"></td>
+    </tr>
+</table>
 
 </body>
 </html>

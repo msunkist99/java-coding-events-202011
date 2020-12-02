@@ -1,5 +1,6 @@
 package org.launchcode.javacodingevents202011.controllers;
 
+import org.launchcode.javacodingevents202011.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Controller
 public class EventController {
-    private static List<String> events = new ArrayList<>();
+    private static List<Event> events = new ArrayList<>();
 
     //handles GET requests to /events
     @GetMapping("events")
@@ -29,8 +30,10 @@ public class EventController {
 
     //handles POST requests to /events/create
     @PostMapping("/events/create")
-    public String createEvent(@RequestParam String eventName){
-        events.add(eventName);
+    public String createEvent(@RequestParam String eventName,
+                              @RequestParam String eventDescription){
+        events.add(new Event(eventName, eventDescription));
+
         // the following redirects to /events
         return "redirect:";
     }

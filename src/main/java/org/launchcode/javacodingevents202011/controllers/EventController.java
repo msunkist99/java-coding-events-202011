@@ -4,10 +4,7 @@ import org.launchcode.javacodingevents202011.data.EventData;
 import org.launchcode.javacodingevents202011.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.beans.EventSetDescriptor;
 import java.util.ArrayList;
@@ -30,11 +27,21 @@ public class EventController {
         return "events/create";
     }
 
+//    //handles POST requests to /events/create
+//    @PostMapping("/events/create")
+//    public String processCreateEventForm(@RequestParam String eventName,
+//                              @RequestParam String eventDescription){
+//        EventData.add(new Event(eventName, eventDescription));
+//
+//        // the following redirects to /events
+//        return "redirect:";
+//    }
+
     //handles POST requests to /events/create
+    //@ModelAttribute - Spring creates the Event model - newEvent
     @PostMapping("/events/create")
-    public String createEvent(@RequestParam String eventName,
-                              @RequestParam String eventDescription){
-        EventData.add(new Event(eventName, eventDescription));
+    public String processCreateEventForm(@ModelAttribute Event newEvent){
+        EventData.add(newEvent);
 
         // the following redirects to /events
         return "redirect:";

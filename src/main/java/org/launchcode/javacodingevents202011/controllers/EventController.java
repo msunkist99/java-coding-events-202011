@@ -39,4 +39,25 @@ public class EventController {
         // the following redirects to /events
         return "redirect:";
     }
+
+    @GetMapping("/events/remove")
+    public String displayRemoveEventsForm(Model model){
+        model.addAttribute("title", "Remove Events");
+        model.addAttribute("events", EventData.getAll());
+        return "events/remove";
+    }
+
+    @PostMapping("events/remove")
+    //@RequestParam(required = false) -- allows a null eventsId array to be passed
+    //handles situation when nothing is selected to be removed
+    public String processRemoveEventsForm(@RequestParam(required = false) int[] eventIds){
+        if (eventIds != null) {
+            for (int id : eventIds) {
+                EventData.remove(id);
+            }
+        }
+
+        // the following redirects to /events
+        return "redirect:";
+    }
 }

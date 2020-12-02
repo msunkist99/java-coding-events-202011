@@ -48,7 +48,7 @@ public class EventController {
     }
 
     @GetMapping("/events/remove")
-    public String displayRemoveEventsForm(Model model){
+    public String displayRemoveEventForm(Model model){
         model.addAttribute("title", "Remove Events");
         model.addAttribute("events", EventData.getAll());
         return "events/remove";
@@ -57,12 +57,31 @@ public class EventController {
     @PostMapping("events/remove")
     //@RequestParam(required = false) -- allows a null eventsId array to be passed
     //handles situation when nothing is selected to be removed
-    public String processRemoveEventsForm(@RequestParam(required = false) int[] eventIds){
+    public String processRemoveEventForm(@RequestParam(required = false) int[] eventIds){
         if (eventIds != null) {
             for (int id : eventIds) {
                 EventData.remove(id);
             }
         }
+        // the following redirects to /events
+        return "redirect:";
+    }
+
+    @GetMapping("/events/edit/{eventId}")
+    public String displayEditEventForm(Model model, @PathVariable int eventId){
+        Event eventData = EventData.getById(eventId);
+
+        model.addAttribute("title", "Edit Event " + eventData.getName() + " (id=" + eventData.getId() + ")");
+        model.addAttribute("event", EventData.getById(eventId));
+        return "events/edit";
+    }
+
+    @PostMapping("/events/edit")
+    public String processEditEventForm(int eventId, String name, String description){
+        Event eventData = EventData.getById(eventId);
+
+        eventData.setName(name);
+        eventData.setDescription(description);
 
         // the following redirects to /events
         return "redirect:";

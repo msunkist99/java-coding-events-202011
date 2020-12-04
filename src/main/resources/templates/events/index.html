@@ -16,6 +16,11 @@
             <th>Event ID</th>
             <th>Event Name</th>
             <th>Event Description</th>
+            <th>Event Email</th>
+            <th>Event Location</th>
+            <th>Event Registration Required</th>
+            <th>Event Attendee Count</th>
+            <th>Event Rating</th>
         </tr>
     </thead>
     <tr th:each="event : ${events}">
@@ -24,6 +29,13 @@
         <td th:text="${event.name}"></td>
         <!-- Thymeleaf will call event.getDescription() for the follow event.description -->
         <td th:text="${event.description}"></td>
+        <!-- Thymeleaf will call event.getContactEmail() for the follow event.description -->
+        <td th:text="${event.contactEmail}"></td>
+        <td th:text="${event.location}"></td>
+        <td th:text="${event.registration}"></td>
+        <td th:text="${event.attendeeCount}"></td>
+        <td th:text="${event.rating}"></td>
+
         <td>
             <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
         </td>

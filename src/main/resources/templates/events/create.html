@@ -4,23 +4,58 @@
 
 <body class="container">
 
-<h1>Create Event</h1>
 
 <nav th:replace="fragments :: header"></nav>
 
 <form method="post" action="/events/create">
     <div class="form-group" >
         <label>Name
-            <input class="form-control" type="text" name="name"/>
+            <input class="form-control" th:field="${event.name}"/>
         </label>
-
+        <p class="error" th:errors="${event.name}"></p>
     </div>
 
     <div class="form-group" >
         <label>Description
-            <input class="form-control" type="text" name="description"/>
+            <input class="form-control" th:field="${event.description}"/>
         </label>
+        <p class="error" th:errors="${event.description}"></p>
+    </div>
 
+
+    <div class="form-group" >
+        <label>Contact Email
+            <input class="form-control" th:field="${event.contactEmail}"/>
+        </label>
+        <p class="error" th:errors="${event.contactEmail}"></p>
+    </div>
+
+    <div class="form-group" >
+        <label>Location
+            <input class="form-control" th:field="${event.location}"/>
+        </label>
+        <p class="error" th:errors="${event.location}"></p>
+    </div>
+
+    <div class="form-group" >
+        <label>Registration
+            <input class="form-control" th:field="${event.registration}"/>
+        </label>
+        <p class="error" th:errors="${event.registration}"></p>
+    </div>
+
+    <div class="form-group" >
+        <label>Attendee Count
+            <input class="form-control" th:field="${event.attendeeCount}"/>
+        </label>
+        <p class="error" th:errors="${event.attendeeCount}"></p>
+    </div>
+
+    <div class="form-group" >
+        <label>Rating
+            <input class="form-control" th:field="${event.rating}"/>
+        </label>
+        <p class="error" th:errors="${event.rating}"></p>
     </div>
 
     <div class="form_group">
